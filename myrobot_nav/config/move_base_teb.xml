@@ -1,0 +1,31 @@
+<launch>
+
+  <arg name="odom_frame_id"   default="odom"/>
+  <arg name="base_frame_id"   default="base_footprint"/>
+  <arg name="global_frame_id" default="map"/>
+  <arg name="odom_topic" default="odom" />
+  <arg name="laser_topic" default="scan" />
+  <arg name="cmd_topic" default="cmd_vel" />
+  <!--arg name="move_base_topic" default="move_base" /-->
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find myrobot_nav)/config/navigation/costmap_2wd_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find myrobot_nav)/config/navigation/costmap_2wd_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find myrobot_nav)/config/navigation/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find myrobot_nav)/config/navigation/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find myrobot_nav)/config/navigation/move_base_teb_params.yaml" command="load" />
+    <rosparam file="$(find myrobot_nav)/config/navigation/move_base_params.yaml" command="load" />
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+
+    <!-- reset frame_id parameters using user input data -->
+    <param name="global_costmap/global_frame" value="$(arg global_frame_id)"/>
+    <param name="global_costmap/robot_base_frame" value="$(arg base_frame_id)"/>
+    <param name="local_costmap/global_frame" value="$(arg global_frame_id)"/>
+    <param name="local_costmap/robot_base_frame" value="$(arg base_frame_id)"/>
+    <param name="global_costmap/obstacle_layer/scan/topic" value="$(arg laser_topic)"/>
+    <param name="local_costmap/obstacle_layer/scan/topic" value="$(arg laser_topic)"/>
+    <remap from="cmd_vel" to="$(arg cmd_topic)"/>
+    <remap from="odom" to="$(arg odom_topic)"/>
+    <remap from="scan" to="$(arg laser_topic)"/>
+  </node>
+</launch>

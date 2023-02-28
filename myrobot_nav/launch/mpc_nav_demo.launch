@@ -1,0 +1,5 @@
+<launch>
+    <!-- 运行mpc_control节点 -->
+    <node pkg="myrobot_nav" type="mpc_control" name="mpc_control" output="screen" />
+
+</launch>

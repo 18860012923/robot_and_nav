@@ -1,0 +1,46 @@
+VFHPlanner:
+  param_a: 50.0 
+  param_b: 0.75 
+  param_c: 3.0 
+  max_v: 0.5 
+  min_v: 0.0 
+  max_rv: 0.4 
+  robot_radius: 0.3 
+  safe_dist: 0.2 
+  param_mu1: 7 
+  param_mu2: 3 
+  param_mu3: 3 
+  sector_angle: 0.1 
+  window_size: 3.0 
+  wide_angle: 0.6 
+  threshold_high: 15000. 
+  threshold_low: 3500. 
+  clutter_const: 66000 
+  wait_x: 2.0 
+  wait_y: 0.6 
+  use_wait: true 
+
+
+VFHPlannerRos:
+ vfh_sections_number: 90
+ vhf_detection_range: 5
+ increase_rate: 0.5
+ goal_weight: 1
+ curr_direction_weight: 2
+ prev_direction_weight: 8
+ smooth_length: 45
+ front_angle: 25
+ vfh_threshold: 160
+ wide_valley_threshold: 12
+ very_narrow_valley_threshold: 6
+ max_vel_x_: 1.2
+ max_vel_th_: 0.2
+ min_vel_th_: -0.2
+ min_in_place_vel_th_: 0.9
+ acc_lim_x_: 0.2
+ acc_lim_theta_: 0.1
+ xy_goal_tolerance_: 0.10
+ yaw_goal_tolerance_: 0.1
+ local_planner_frequence: 5
+ ignore_global_plan_updates: False
+ restore_defaults: False

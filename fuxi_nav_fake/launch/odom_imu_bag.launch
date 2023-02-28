@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="use_sim_time" value="false" />
+    <!--param name="robot_description" textfile="$(find tracer_base)/urdf/agilex_tracer.urdf" /-->
+    
+    <!--启动ekf融合-->
+    <include file="$(find robot_pose_ekf)/launch/robot_pose_ekf.launch">
+    <!--include file="$(find robot_localization)/launch/ekf_nodelet_template.launch"-->
+    </include>
+    <!--启动tf转换后的轨迹打印-->
+    <node pkg="fuxi_nav_fake" name="show_tracer" type="show_tracer" output="screen">
+     <param name="father_frame" type="string" value="odom_combined"/>
+     </node>
+    <!--启动rviz-->
+   <node name="rviz" pkg="rviz" type="rviz" required="true"
+      args="-d $(find fuxi_nav_fake)/rviz/combine.rviz"/>
+</launch>

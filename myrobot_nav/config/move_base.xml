@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="use_sim_time" value="true" />
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" clear_params="true">
+		<param name="planner_patience" value="2.0" />
+    	<param name="planner_frequency" value="2.0" />
+
+		<param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+		<param name="controller_patience" value="5.0" />
+		<param name="controller_frequency" value="10.0" />
+
+
+        <rosparam file="$(find myrobot_nav)/config/fake/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find myrobot_nav)/config/fake/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find myrobot_nav)/config/fake/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find myrobot_nav)/config/fake/global_costmap_params.yaml" command="load" />
+        <!--rosparam file="$(find myrobot_nav)/config/fake/base_local_planner_params.yaml" command="load" /-->
+        <rosparam file="$(find myrobot_nav)/config/fake/move_base_teb_params.yaml" command="load" />
+
+
+        <param name="base_global_planner" value="global_planner/GlobalPlanner" />
+	    <rosparam file="$(find myrobot_nav)/config/fake/base_global_planner_params.yaml" command="load" />
+	<!--param name="base_global_planner" value="global_planner/RRTGlobalPlanner"/>
+	<rosparam file="$(find rrt-global-planner)/params/rrt_global_planner.yaml" command="load" /-->
+	    <remap from="cmd_vel" to="cmd_vel" />
+    </node>
+  
+</launch>

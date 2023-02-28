@@ -1,0 +1,5 @@
+<launch>
+    <!-- 运行my_apf节点 -->
+    <node pkg="myrobot_nav" type="my_apf" name="my_apf" output="screen" />
+
+</launch>

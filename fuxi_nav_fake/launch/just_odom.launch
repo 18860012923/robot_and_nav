@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+    <!--启动仿真-->
+    <include file="$(find fuxi_nav_fake)/launch/fake_nav.launch"/>
+    <!--启动tf转换后的轨迹打印-->
+    <node pkg="fuxi_nav_fake" name="show_tracer" type="show_tracer">
+     <param name="father_frame" type="string" value="odom"/>
+     </node>
+    <!--启动rviz-->
+   <node name="rviz" pkg="rviz" type="rviz" required="true"
+      args="-d $(find fuxi_nav_fake)/rviz/test.rviz"/>
+</launch>
